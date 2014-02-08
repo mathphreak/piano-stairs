@@ -1,17 +1,16 @@
-
+#define numAnalogPins 8
 
 void setup() {
   Serial.begin(9600);
   calibrate();
 }
 
-float analogPins[] = {0, 1, 2, 3, 4, 5};
-int numAnalogPins = 6;
-int thresholds[6];
+float analogPins[] = {0, 1, 2, 3, 4, 5, 6, 7};
+int thresholds[numAnalogPins];
 float percentThresh = 1.03;
 int absoluteThresh = 20;
 
-int sensorHistory[6][10];
+int sensorHistory[numAnalogPins][10];
 int bufferIndex = 0;
 
 void calibrate() {
@@ -25,7 +24,7 @@ void calibrate() {
     thresholds[pin] = thresholds[pin] / maxSteps;
   }
   
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < numAnalogPins; i++) {
     for (int j = 0; j < 10; j++) {
        sensorHistory[i][j] = thresholds[i];
     }
